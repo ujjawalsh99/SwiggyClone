@@ -4,6 +4,9 @@ export const CDN_URL =
 export const LOGO_URL =
   "https://play-lh.googleusercontent.com/A8jF58KO1y2uHPBUaaHbs9zSvPHoS1FrMdrg8jooV9ftDidkOhnKNWacfPhjKae1IA";
 
+export const RestaurantDetailURL =
+  "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.6773353&lng=77.3464618&restaurantId=";
+
 // function console1() {
 //   console.log("Console 1");
 // }
