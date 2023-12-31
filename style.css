@@ -61,15 +61,15 @@
   justify-content: start;
 }
 
-.res-container a{
+.res-container a {
   color: #000;
   text-decoration: none;
 }
 
-.res-card h3{
+.res-card h3 {
   margin-top: 0;
 }
-.res-card h4{
+.res-card h4 {
   margin-top: 0;
 }
 /* Shimmer Effect */
@@ -180,4 +180,10 @@ body {
 .res-recommended {
   align-self: start;
   margin-left: 300px;
+}
+
+.user-details {
+  border: 1px solid #000;
+  padding: 10px;
+  margin: 20px 0;
 }

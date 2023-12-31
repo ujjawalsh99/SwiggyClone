@@ -23,16 +23,17 @@ const Body = () => {
 
     const jsonData = await responseFromAPI.json();
     setRestaurantDataList(
-      jsonData?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+      jsonData?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
-    setFilteredRestaurants(jsonData?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+    setFilteredRestaurants(jsonData?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
       ?.restaurants);
   }
 
   useEffect(() => {
     fetchDataFromAPI();
   }, []);
+  // console.log(filteredRestaurants);
   return filteredRestaurants.length == 0 ? (
     <div className="shimmers">
       <div
