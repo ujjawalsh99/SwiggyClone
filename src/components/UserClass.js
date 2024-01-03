@@ -14,9 +14,9 @@ class UserClass extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState){
-    console.log(prevProps);
-    console.log(prevState);
-    console.log("Parent Component Did Update");
+    // console.log(prevProps);
+    // console.log(prevState);
+    // console.log("Parent Component Did Update");
   }
 
   render() {

@@ -1,9 +1,10 @@
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import ShimmersUI from "./Shimmers";
+import useCompleteRestaurantData from "../utils/useCompleteRestaurantData";
 
 const Body = () => {
-  const [restaurantDataList, setRestaurantDataList] = useState([]);
+  let restaurantDataList;
   const [searchData, setSearchData] = useState("");
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
@@ -16,24 +17,11 @@ const Body = () => {
     setFilteredRestaurants(filterTopRated);
   }
 
-  async function fetchDataFromAPI() {
-    const responseFromAPI = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.6773353&lng=77.3464618&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
-
-    const jsonData = await responseFromAPI.json();
-    setRestaurantDataList(
-      jsonData?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants
-    );
-    setFilteredRestaurants(jsonData?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-      ?.restaurants);
-  }
-
+  restaurantDataList = useCompleteRestaurantData();
   useEffect(() => {
-    fetchDataFromAPI();
-  }, []);
-  // console.log(filteredRestaurants);
+    setFilteredRestaurants(restaurantDataList);
+  }, [restaurantDataList]);
+
   return filteredRestaurants.length == 0 ? (
     <div className="shimmers">
       <div
@@ -65,7 +53,9 @@ const Body = () => {
             onClick={() => {
               if (searchData) {
                 let resList = restaurantDataList.filter((data) =>
-                  data?.info.name.toLowerCase().includes(searchData.toLowerCase())
+                  data?.info.name
+                    .toLowerCase()
+                    .includes(searchData.toLowerCase())
                 );
                 setFilteredRestaurants(resList);
               }
@@ -97,5 +87,5 @@ const Body = () => {
 export default Body;
 
 function execute() {
-  console.log("Bhakti he shakti hai");
+  // console.log("Bhakti he shakti hai");
 }
