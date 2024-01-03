@@ -9,6 +9,7 @@ const Header = () => {
     setStatus(status);
     // document.getElementsByClassName('login')[0].innerHTML = document.getElementsByClassName('login')[0].innerHTML == 'Login' ? 'Logout' : 'Login';
   }
+  // console.log("Render Header");
   return (
     <div className="header">
       <div className="logo-container">
