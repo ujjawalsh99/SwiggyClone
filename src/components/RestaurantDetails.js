@@ -1,28 +1,12 @@
-import { useEffect, useState } from "react";
-import { RestaurantDetailURL } from "../utils/constants";
 import { useParams } from "react-router-dom";
+import useRestaurantData from "../utils/useRestaurantDetails";
 
 const RestaurantDetails = () => {
   let dummyCount = new Array(20).fill(0);
-
-  const [restaurantData, setRestaurantData] = useState(null);
-  const [recommendedData, setRecommendedData] = useState([]);
   const { id } = useParams();
 
-  const fetchResturantDetailsData = async (id) => {
-    const resDetailData = await fetch(`${RestaurantDetailURL}${id}`);
-    const jsonData = await resDetailData.json();
-    setRestaurantData(jsonData?.data?.cards[0]?.card?.card?.info);
-    setRecommendedData(
-      jsonData?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]
-        ?.card?.card?.itemCards
-    );
-  };
-
-  useEffect(() => {
-    fetchResturantDetailsData(id);
-  }, []);
-
+  // console.log(useRestaurantData(id));
+  let [restaurantData, recommendedData] = useRestaurantData(id);
   if (restaurantData && recommendedData?.length) {
     const {
       name,
@@ -54,7 +38,7 @@ const RestaurantDetails = () => {
           <h3>Recommended</h3>
           <ul>
             {recommendedData.map((item) => (
-              <li>{item?.card?.info?.name}</li>
+              <li key={item?.card?.info?.id}>{item?.card?.info?.name}</li>
             ))}
           </ul>
         </div>
