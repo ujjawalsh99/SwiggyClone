@@ -1,11 +1,19 @@
 import { useParams } from "react-router-dom";
+import { useState } from "react";
 import useRestaurantData from "../utils/useRestaurantDetails";
 import ContentShimmer from "./ContentShimmer";
 import StarIcon from "@mui/icons-material/Star";
 import InfoIcon from "@mui/icons-material/Info";
 import TimelapseIcon from "@mui/icons-material/Timelapse";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
-import { OFFER_ICON } from "../utils/constants";
+import { CDN_URL, BANK_OFFER_ICON_SIZE } from "../utils/constants";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import VegIcon from "../assets/svg/veg-icon.svg";
+import NonVegIcon from "../assets/svg/non-veg-icon.svg";
 
 const OfferComponent = ({ data }) => {
   const {
@@ -15,7 +23,7 @@ const OfferComponent = ({ data }) => {
     <div className="border-2 border-gray-300 p-2 pr-8 rounded-md min-w-80">
       <div className="flex gap-4">
         <div>
-          <img src={OFFER_ICON + offerLogo}></img>
+          <img src={CDN_URL + BANK_OFFER_ICON_SIZE + offerLogo}></img>
         </div>
         <div className="font-bold text-lg text-gray-500">{header}</div>
       </div>
@@ -27,19 +35,100 @@ const OfferComponent = ({ data }) => {
 };
 
 const RestaurantCategory = (props) => {
-  let {data} = props;
-  console.log(data);
+  let {
+    data: { title, itemCards },
+    lastEntry,
+  } = props;
+  const [expanded, setExpanded] = useState(title);
+  const handleChange = (panel) => (event, newExpanded) => {
+    setExpanded(newExpanded ? panel : false);
+  };
+  return (
+    <div className="my-8">
+      <Accordion expanded={expanded === title} onChange={handleChange(title)}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography>
+            <span className="font-bold text-2xl text-black">
+              {title + " (" + itemCards.length + ") "}
+            </span>
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            {itemCards.map((item, index) => {
+              let {
+                card: { info },
+              } = item;
+              return (
+                <div
+                  key={info.id}
+                  className={
+                    itemCards.length == 1 || index == itemCards.length - 1
+                      ? ""
+                      : "border-b-2 border-gray-200 mb-5"
+                  }
+                >
+                  <div className="flex justify-between mb-10 items-center">
+                    <div className="w-4/5">
+                      <div className="my-2">
+                        <img
+                          className="w-4"
+                          src={
+                            info.itemAttribute.vegClassifier == "VEG"
+                              ? VegIcon
+                              : NonVegIcon
+                          }
+                        ></img>
+                      </div>
+                      <div>
+                        <div className="font-semibold">{info.name}</div>
+                        <div className="font-light">
+                          ₹{" "}
+                          {info.price
+                            ? Math.floor(info.price / 100)
+                            : Math.floor(info.defaultPrice / 100)}
+                        </div>
+                      </div>
+                      <div className="my-3 text-sm font-extralight text-gray-500">
+                        {info.description}
+                      </div>
+                    </div>
+                    <div className="self-end">
+                      <img
+                        className={
+                          info.imageId ? "w-[125px] rounded-md" : "hidden"
+                        }
+                        src={CDN_URL + info.imageId}
+                        alt="image"
+                      ></img>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+      <div
+        className={
+          lastEntry == "pending" ? "border-t-8 border-gray-200 my-12" : ""
+        }
+      ></div>
+    </div>
+  );
 };
 
 const RestaurantDetails = () => {
   let dummyCount = new Array(10).fill(0);
   const { id } = useParams();
-
   let [resPrimaryData, resOfferData, resRecommended] = useRestaurantData(id);
-  // console.log(resRecommended);
   return Object.keys(resPrimaryData).length && resOfferData.length ? (
     <div className="w-full">
-      <div className="w-4/6 border-2 border-black h-[400px] m-auto p-10">
+      <div className="w-4/6 m-auto p-10">
         <div id="res-primary" className="my-8">
           <div className="flex justify-between">
             <div>
@@ -100,7 +189,11 @@ const RestaurantDetails = () => {
         <hr className="border-t-2 border-gray-200"></hr>
         <div id="res-category" className="my-5">
           {resRecommended.map((item, index) => (
-            <RestaurantCategory key={index} data={item} />
+            <RestaurantCategory
+              key={index}
+              data={item?.card?.card}
+              lastEntry={index == resRecommended.length - 1 ? "end" : "pending"}
+            />
           ))}
         </div>
       </div>

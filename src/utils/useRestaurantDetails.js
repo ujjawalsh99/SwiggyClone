@@ -8,20 +8,25 @@ const useRestaurantData = (id) => {
     []
   );
   const fetchResturantDetailsData = async (id) => {
+    let restaurantCategoryData;
     const resDetailData = await fetch(`${RestaurantDetailURL}${id}`);
     const jsonData = await resDetailData.json();
     let {
       data: { cards },
     } = jsonData;
+
     setRestaurantPrimaryDetail(cards[0]?.card?.card?.info);
+
     setRestaurantOffers(
       cards[1]?.card?.card?.gridElements?.infoWithStyle?.offers
     );
-    console.log(cards[2]?.groupedCard?.cardGroupMap?.REGULAR);
 
-    let [, , ...restaurantCategoryData] =
-      cards[2]?.groupedCard?.cardGroupMap?.REGULAR;
-    console.log(restaurantCategoryData);
+    restaurantCategoryData =
+      (cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards).filter(
+        (item) =>
+          Object.keys(item?.card?.card).includes("title") &&
+          Object.keys(item?.card?.card).includes("itemCards")
+      );
     setRestaurantRecommendations(restaurantCategoryData);
   };
 

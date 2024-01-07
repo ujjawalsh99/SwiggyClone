@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import About from "./components/About";
+import OffersComponent from "./components/Offers.js";
 import Error from "./components/Error";
 import RestaurantDetails from "./components/RestaurantDetails";
 // import { default as alpha, console2, console3 } from "./utils/constants";
@@ -31,7 +31,7 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/offers",
-        element: <About />,
+        element: <OffersComponent />,
       },
       {
         path: "/career",
