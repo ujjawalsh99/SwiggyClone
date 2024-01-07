@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 const useCompleteRestaurantData = () => {
   const [restaurantDataList, setRestaurantDataList] = useState([]);
+  const [foodMenu, setFoodMenu] = useState([]);
   // console.log("Custom Hook");
   async function fetchDataFromAPI() {
     const responseFromAPI = await fetch(
@@ -9,10 +10,12 @@ const useCompleteRestaurantData = () => {
     );
 
     const jsonData = await responseFromAPI.json();
-    // console.log(jsonData);
     setRestaurantDataList(
-      jsonData?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+      jsonData?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
+    );
+    setFoodMenu(
+      jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.info
     );
   }
 
@@ -22,7 +25,7 @@ const useCompleteRestaurantData = () => {
     // console.log(restaurantDataList);
   }, []);
   // console.log(restaurantDataList);
-  return restaurantDataList;
+  return [restaurantDataList, foodMenu];
 };
 
 export default useCompleteRestaurantData;

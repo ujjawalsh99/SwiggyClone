@@ -1,8 +1,9 @@
+import LaunchImage from '../assets/images/launch.jpg';
+
 const Instamart = () => {
   return (
-    <div>
-      <h1>Welcome to Swiggy Instamart..</h1>
-      <h3>Launching Soooon!!!</h3>
+    <div className='flex justify-center'>
+      <img src={LaunchImage} alt='Launch Soon'></img>
     </div>
   );
 };

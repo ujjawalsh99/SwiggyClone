@@ -4,7 +4,6 @@ import Header from "./components/Header";
 import Body from "./components/Body";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import About from "./components/About";
-import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantDetails from "./components/RestaurantDetails";
 // import { default as alpha, console2, console3 } from "./utils/constants";
@@ -19,6 +18,7 @@ const AppLayout = () => {
 };
 
 const InstaMart = lazy(() => import("./components/Instamart.js"));
+const Career = lazy(() => import("./components/Career.js"));
 
 const appRouter = createBrowserRouter([
   {
@@ -30,12 +30,16 @@ const appRouter = createBrowserRouter([
         element: <Body />,
       },
       {
-        path: "/about",
+        path: "/offers",
         element: <About />,
       },
       {
-        path: "/contact",
-        element: <Contact />,
+        path: "/career",
+        element: (
+          <Suspense fallback={<div>Loading......</div>}>
+            <Career />
+          </Suspense>
+        ),
       },
       {
         path: "/restaurant-details/:id",
