@@ -1,4 +1,4 @@
-import { CDN_URL } from "../utils/constants";
+import { CDN_URL } from "../../utils/constants";
 import { Link } from "react-router-dom";
 import StarsIcon from "@mui/icons-material/Stars";
 import CircleIcon from "@mui/icons-material/Circle";

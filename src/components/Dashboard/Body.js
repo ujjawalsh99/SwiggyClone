@@ -1,7 +1,7 @@
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
-import ShimmersUI from "./Shimmers";
-import useCompleteRestaurantData from "../utils/useCompleteRestaurantData";
+import ShimmersUI from "../shared/components/Shimmers/Shimmers";
+import useCompleteRestaurantData from "../../utils/useCompleteRestaurantData";
 import CardContainer from "./RestaurantMenu";
 
 const Body = () => {

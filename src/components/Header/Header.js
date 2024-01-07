@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import useOnlineStatus from "../utils/useOnlineStatus";
-import ReactLogo from "../assets/svg/swiggy.svg";
+import useOnlineStatus from "../../utils/useOnlineStatus";
+import ReactLogo from "../../assets/svg/swiggy.svg";
 import HomeIcon from "@mui/icons-material/Home";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import NavigationIcon from "@mui/icons-material/Navigation";

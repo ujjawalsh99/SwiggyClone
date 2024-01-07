@@ -10,6 +10,7 @@ const useCompleteRestaurantData = () => {
     );
 
     const jsonData = await responseFromAPI.json();
+    console.log(jsonData);
     setRestaurantDataList(
       jsonData?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants

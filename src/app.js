@@ -1,11 +1,11 @@
 import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
-import Header from "./components/Header";
-import Body from "./components/Body";
+import Header from "./components/Header/Header.js";
+import Body from "./components/Dashboard/Body.js";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import OffersComponent from "./components/Offers.js";
+import OffersComponent from "./components/Offers/Offers.js";
 import Error from "./components/Error";
-import RestaurantDetails from "./components/RestaurantDetails";
+import RestaurantDetails from "./components/RestaurantDetail/RestaurantDetails.js";
 // import { default as alpha, console2, console3 } from "./utils/constants";
 
 const AppLayout = () => {
@@ -17,7 +17,7 @@ const AppLayout = () => {
   );
 };
 
-const InstaMart = lazy(() => import("./components/Instamart.js"));
+const InstaMart = lazy(() => import("./components/Instamart/Instamart.js"));
 const Career = lazy(() => import("./components/Career.js"));
 
 const appRouter = createBrowserRouter([

@@ -1,4 +1,4 @@
-import { CDN_URL } from "../utils/constants";
+import { CDN_URL } from "../../utils/constants";
 
 const Card = (props) => (
   <div className="cursor-pointer rounded-md overflow-hidden m-4 transition-all duration-200 ease-in-out flex-1 shrink-0 basis-36">
