@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import ShimmersUI from "../shared/components/Shimmers/Shimmers";
 import useCompleteRestaurantData from "../../utils/useCompleteRestaurantData";
 import CardContainer from "./RestaurantMenu";
+import BestOffersComponent from "./BestOffersComonent";
 
 const Body = () => {
   let restaurantDataList;
   let foodMenuBanner;
+  let bestOffersList;
   const [searchData, setSearchData] = useState("");
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
@@ -19,7 +21,8 @@ const Body = () => {
     setFilteredRestaurants(filterTopRated);
   }
 
-  [restaurantDataList, foodMenuBanner] = useCompleteRestaurantData();
+  [bestOffersList, restaurantDataList, foodMenuBanner] =
+    useCompleteRestaurantData();
   useEffect(() => {
     setFilteredRestaurants(restaurantDataList);
   }, [restaurantDataList]);
@@ -35,6 +38,15 @@ const Body = () => {
   ) : (
     <div className="bg-slate-100 h-full w-full p-10">
       <div className="flex flex-col">
+        <div className={bestOffersList.length ? "w-11/12 m-auto" : "hidden"}>
+          <p className="text-xl font-bold ml-16">Best offers for you</p>
+          <div className="offer-banner flex gap-8 m-8 ml-16 overflow-x-scroll">
+            {bestOffersList.map((item, index) => (
+              <BestOffersComponent key={item.id} data={item.imageId} />
+            ))}
+          </div>
+        </div>
+
         <div className="w-11/12 m-auto">
           <p className="text-xl font-bold ml-16">What's on your mind?</p>
           <CardContainer cards={foodMenuBanner} />

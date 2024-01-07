@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.cards-container, .offer-scroller {
+.cards-container, .offer-scroller, .offer-banner {
   &::-webkit-scrollbar {
     display: none;
   }
