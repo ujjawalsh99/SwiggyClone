@@ -3,9 +3,10 @@ import ReactDOM from "react-dom/client";
 import Header from "./components/Header/Header.js";
 import Body from "./components/Dashboard/Body.js";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import OffersComponent from "./components/Offers/Offers.js";
 import Error from "./components/Error";
 import RestaurantDetails from "./components/RestaurantDetail/RestaurantDetails.js";
+import LinearProgress from "@mui/material/LinearProgress";
+import Box from "@mui/material/Box";
 // import { default as alpha, console2, console3 } from "./utils/constants";
 
 const AppLayout = () => {
@@ -19,6 +20,12 @@ const AppLayout = () => {
 
 const InstaMart = lazy(() => import("./components/Instamart/Instamart.js"));
 const Career = lazy(() => import("./components/Career.js"));
+const SearchRestaurant = lazy(() =>
+  import("./components/Search/SearchRestaurant.js")
+);
+const RestaurantDetails = lazy(() =>
+  import("./components/RestaurantDetail/RestaurantDetails.js")
+);
 
 const appRouter = createBrowserRouter([
   {
@@ -30,25 +37,57 @@ const appRouter = createBrowserRouter([
         element: <Body />,
       },
       {
-        path: "/offers",
-        element: <OffersComponent />,
+        path: "/search",
+        element: (
+          <Suspense
+            fallback={
+              <Box sx={{ width: "100%" }}>
+                <LinearProgress />
+              </Box>
+            }
+          >
+            <SearchRestaurant />
+          </Suspense>
+        ),
       },
       {
         path: "/career",
         element: (
-          <Suspense fallback={<div>Loading......</div>}>
+          <Suspense
+            fallback={
+              <Box sx={{ width: "100%" }}>
+                <LinearProgress />
+              </Box>
+            }
+          >
             <Career />
           </Suspense>
         ),
       },
       {
         path: "/restaurant-details/:id",
-        element: <RestaurantDetails />,
+        element: (
+          <Suspense
+            fallback={
+              <Box sx={{ width: "100%" }}>
+                <LinearProgress />
+              </Box>
+            }
+          >
+            <RestaurantDetails />
+          </Suspense>
+        ),
       },
       {
         path: "/instamart",
         element: (
-          <Suspense fallback={<div>Loading......</div>}>
+          <Suspense
+            fallback={
+              <Box sx={{ width: "100%" }}>
+                <LinearProgress />
+              </Box>
+            }
+          >
             <InstaMart />
           </Suspense>
         ),

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import useOnlineStatus from "../../utils/useOnlineStatus";
 import ReactLogo from "../../assets/svg/swiggy.svg";
 import HomeIcon from "@mui/icons-material/Home";
-import LocalOfferIcon from "@mui/icons-material/LocalOffer";
+import SearchIcon from "@mui/icons-material/Search";
 import NavigationIcon from "@mui/icons-material/Navigation";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -17,7 +17,9 @@ const Header = () => {
   return (
     <div className="header flex shadow-md shadow-slate-200 w-full justify-between">
       <div className="w-1/6 flex p-3 justify-center">
-        <img className="w-4/6" src={ReactLogo}></img>
+        <Link to="/" className="w-4/6">
+          <img className="w-full" src={ReactLogo}></img>
+        </Link>
       </div>
       <div className="w-4/6 shrink-0">
         <ul className="flex p-8 justify-end">
@@ -36,11 +38,11 @@ const Header = () => {
 
           <li>
             <Link
-              to="/offers"
+              to="/search"
               className="px-7 flex justify-center items-center gap-2 font-medium hover:text-orange-400 cursor-pointer"
             >
-              <LocalOfferIcon />
-              Offers
+              <SearchIcon />
+              Search
             </Link>
           </li>
           <li>
@@ -52,7 +54,7 @@ const Header = () => {
               Career
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link
               to="/sign-in"
               className="px-7 flex justify-center items-center gap-2 font-medium hover:text-orange-400 cursor-pointer"
@@ -60,7 +62,7 @@ const Header = () => {
               <AccountCircleIcon />
               Sign In
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link
               to="/instamart"

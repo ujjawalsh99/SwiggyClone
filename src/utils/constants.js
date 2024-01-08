@@ -5,6 +5,9 @@ export const RestaurantDetailURL =
 
 export const BANK_OFFER_ICON_SIZE = "fl_lossy,f_auto,q_auto,w_28,h_28/";
 
+export const SWIGGY_SEARCH_API =
+  "https://www.swiggy.com/dapi/restaurants/search/suggest?lat=28.5355161&lng=77.3910265&str=";
+
 export const CareerDomains = [
   {
     id: 1,
