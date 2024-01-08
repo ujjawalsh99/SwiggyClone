@@ -1,12 +1,24 @@
 export const CDN_URL = "https://media-assets.swiggy.com/swiggy/image/upload/";
 
+export const RESTAURANT_DASHBOARD_URL =
+  "https://corsproxy.org/?" +
+  encodeURIComponent(
+    "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.6773353&lng=77.3464618&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+  );
+
 export const RestaurantDetailURL =
-  "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.6773353&lng=77.3464618&restaurantId=";
+  "https://corsproxy.org/?" +
+  encodeURIComponent(
+    "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.6773353&lng=77.3464618&restaurantId="
+  );
 
 export const BANK_OFFER_ICON_SIZE = "fl_lossy,f_auto,q_auto,w_28,h_28/";
 
 export const SWIGGY_SEARCH_API =
-  "https://www.swiggy.com/dapi/restaurants/search/suggest?lat=28.5355161&lng=77.3910265&str=";
+  "https://corsproxy.org/?" +
+  encodeURIComponent(
+    "https://www.swiggy.com/dapi/restaurants/search/suggest?lat=28.5355161&lng=77.3910265&str="
+  );
 
 export const CareerDomains = [
   {

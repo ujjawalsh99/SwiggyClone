@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { RESTAURANT_DASHBOARD_URL } from "../utils/constants";
 
 const useCompleteRestaurantData = () => {
   const [restaurantDataList, setRestaurantDataList] = useState([]);
@@ -6,9 +7,7 @@ const useCompleteRestaurantData = () => {
   const [foodMenu, setFoodMenu] = useState([]);
   // console.log("Custom Hook");
   async function fetchDataFromAPI() {
-    const responseFromAPI = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.6773353&lng=77.3464618&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
+    const responseFromAPI = await fetch(RESTAURANT_DASHBOARD_URL);
 
     const jsonData = await responseFromAPI.json();
     setBestOffersData(
