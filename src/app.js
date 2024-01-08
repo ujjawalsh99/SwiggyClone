@@ -4,7 +4,6 @@ import Header from "./components/Header/Header.js";
 import Body from "./components/Dashboard/Body.js";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Error from "./components/Error";
-import RestaurantDetails from "./components/RestaurantDetail/RestaurantDetails.js";
 import LinearProgress from "@mui/material/LinearProgress";
 import Box from "@mui/material/Box";
 // import { default as alpha, console2, console3 } from "./utils/constants";

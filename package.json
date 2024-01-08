@@ -2,7 +2,6 @@
   "name": "swiggy",
   "version": "1.0.0",
   "description": "This repository is the clone of Swiggy",
-  "main": "index.js",
   "scripts": {
     "start": "npx parcel index.html",
     "build": "npx parcel build index.html",

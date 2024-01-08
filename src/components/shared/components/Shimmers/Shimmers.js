@@ -1,4 +1,4 @@
-export default ShimmersUI = () => {
+const ShimmersUI = () => {
   return (
     <section className="text-gray-200 body-font">
       <div className="container px-5 py-10 mx-auto">
@@ -24,3 +24,5 @@ export default ShimmersUI = () => {
     </section>
   );
 };
+
+export default ShimmersUI;
