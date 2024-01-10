@@ -38,19 +38,27 @@ const Body = () => {
   ) : (
     <div className="bg-slate-100 h-full w-full p-10">
       <div className="flex flex-col">
-        <div className={bestOffersList.length ? "w-11/12 m-auto" : "hidden"}>
-          <p className="text-xl font-bold ml-16">Best offers for you</p>
-          <div className="offer-banner flex gap-8 m-8 ml-16 overflow-x-scroll">
-            {bestOffersList.map((item, index) => (
-              <BestOffersComponent key={item.id} data={item.imageId} />
-            ))}
+        {bestOffersList && bestOffersList.length ? (
+          <div className={bestOffersList.length ? "w-11/12 m-auto" : "hidden"}>
+            <p className="text-xl font-bold ml-16">Best offers for you</p>
+            <div className="offer-banner flex gap-8 m-8 ml-16 overflow-x-scroll">
+              {bestOffersList.map((item, index) => (
+                <BestOffersComponent key={item.id} data={item.imageId} />
+              ))}
+            </div>
           </div>
-        </div>
+        ) : (
+          <div></div>
+        )}
 
-        <div className="w-11/12 m-auto">
-          <p className="text-xl font-bold ml-16">What's on your mind?</p>
-          <CardContainer cards={foodMenuBanner} />
-        </div>
+        {foodMenuBanner && foodMenuBanner.length ? (
+          <div className="w-11/12 m-auto">
+            <p className="text-xl font-bold ml-16">What's on your mind?</p>
+            <CardContainer cards={foodMenuBanner} />
+          </div>
+        ) : (
+          <div></div>
+        )}
 
         <div className="flex justify-between items-center w-10/12 m-auto">
           <div className="flex gap-5">
@@ -58,6 +66,7 @@ const Body = () => {
               type="text"
               name="price"
               id="price"
+              autoComplete="off"
               className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               placeholder="Search Restaurant"
               value={searchData}
