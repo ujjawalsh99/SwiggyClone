@@ -6,13 +6,16 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Error from "./components/Error";
 import LinearProgress from "@mui/material/LinearProgress";
 import Box from "@mui/material/Box";
+import UserContext from "./utils/context-data/UserContext.js";
 // import { default as alpha, console2, console3 } from "./utils/constants";
 
 const AppLayout = () => {
   return (
     <div className="app">
       <Header />
-      <Outlet />
+      <UserContext.Provider value={{ username: "ujjawalsh99@gmail.com" }}>
+        <Outlet />
+      </UserContext.Provider>
     </div>
   );
 };

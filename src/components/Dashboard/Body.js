@@ -1,9 +1,11 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { showTopRatedTag } from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import ShimmersUI from "../shared/components/Shimmers/Shimmers";
 import useCompleteRestaurantData from "../../utils/useCompleteRestaurantData";
 import CardContainer from "./RestaurantMenu";
 import BestOffersComponent from "./BestOffersComonent";
+import { useContext } from "react";
+import UserContext from "../../utils/context-data/UserContext";
 
 const Body = () => {
   let restaurantDataList;
@@ -13,10 +15,12 @@ const Body = () => {
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
   let dummyCount = new Array(20).fill(0);
+  const TopRestaurantCard = showTopRatedTag(RestaurantCard);
+  // console.log(useContext(UserContext));
 
   function getTopRatedRestaurants() {
     let filterTopRated = restaurantDataList.filter((item) => {
-      return item?.info?.avgRating > 4;
+      return item?.info?.avgRating > 4.2;
     });
     setFilteredRestaurants(filterTopRated);
   }
@@ -36,7 +40,10 @@ const Body = () => {
       </div>
     </div>
   ) : (
-    <div className="bg-slate-100 h-full w-full p-10">
+    <div className="bg-slate-100 min-h-full w-full p-10">
+      {/* <UserContext.Consumer>
+        {(d) => console.log(d)}
+      </UserContext.Consumer> */}
       <div className="flex flex-col">
         {bestOffersList && bestOffersList.length ? (
           <div className={bestOffersList.length ? "w-11/12 m-auto" : "hidden"}>
@@ -105,7 +112,9 @@ const Body = () => {
           </p>
           <div className="flex flex-wrap gap-y-14 gap-x-10 justify-start">
             {filteredRestaurants.map((data) => {
-              return (
+              return data?.info.avgRating > 4.2 ? (
+                <TopRestaurantCard key={data?.info?.id} resData={data?.info} />
+              ) : (
                 <RestaurantCard key={data?.info?.id} resData={data?.info} />
               );
             })}

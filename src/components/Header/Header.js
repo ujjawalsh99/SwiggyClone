@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../../utils/useOnlineStatus";
 import ReactLogo from "../../assets/svg/swiggy.svg";
@@ -7,6 +7,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import NavigationIcon from "@mui/icons-material/Navigation";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import UserContext from "../../utils/context-data/UserContext";
 
 const Header = () => {
   let [status, setStatus] = new useState("Login");
@@ -14,6 +15,7 @@ const Header = () => {
     status = status == "Login" ? "Logout" : "Login";
     setStatus(status);
   }
+  console.log(useContext(UserContext));
   return (
     <div className="header flex shadow-md shadow-slate-200 w-full justify-between">
       <div className="w-1/6 flex p-3 justify-center">

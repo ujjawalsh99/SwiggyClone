@@ -1,39 +1,34 @@
 import { CDN_URL } from "../../utils/constants";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import VegIcon from "../../assets/svg/veg-icon.svg";
 import NonVegIcon from "../../assets/svg/non-veg-icon.svg";
-import { useState } from "react";
-
 
 const RestaurantCategory = (props) => {
   let {
     data: { title, itemCards },
     lastEntry,
+    accordionEnableStatus,
+    changeAccordionIndexFunction,
+    currentAccordionStatus,
   } = props;
-  const [expanded, setExpanded] = useState(title);
-  const handleChange = (panel) => (event, newExpanded) => {
-    setExpanded(newExpanded ? panel : false);
+
+  const handleChange = () => {
+    currentAccordionStatus(!accordionEnableStatus);
+    changeAccordionIndexFunction();
   };
   return (
     <div className="my-8">
-      <Accordion expanded={expanded === title} onChange={handleChange(title)}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
+      <div className="shadow-lg p-4">
+        <div
+          className="flex justify-between item-center cursor-pointer select-none"
+          onClick={handleChange}
         >
-          <Typography>
-            <span className="font-bold text-2xl text-black">
-              {title + " (" + itemCards.length + ") "}
-            </span>
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
+          <div className="text-2xl font-bold">
+            {title + " (" + itemCards.length + ") "}
+          </div>
+          <div className="">{accordionEnableStatus ? "🔽" : "◀"}</div>
+        </div>
+        {accordionEnableStatus && (
+          <div className="my-4">
             {itemCards.map((item, index) => {
               let {
                 card: { info },
@@ -60,22 +55,24 @@ const RestaurantCategory = (props) => {
                         ></img>
                       </div>
                       <div>
-                        <div className="font-semibold">{info.name}</div>
-                        <div className="font-light">
+                        <div className="font-bold">{info.name}</div>
+                        <div className="font-normal">
                           ₹{" "}
                           {info.price
                             ? Math.floor(info.price / 100)
                             : Math.floor(info.defaultPrice / 100)}
                         </div>
                       </div>
-                      <div className="my-3 text-sm font-extralight text-gray-500">
+                      <div className="my-3 text-sm font-light text-gray-500">
                         {info.description}
                       </div>
                     </div>
-                    <div className="self-end">
+                    <div className="w-[125px] h-[100px] self-end">
                       <img
                         className={
-                          info.imageId ? "w-[125px] rounded-md" : "hidden"
+                          info.imageId
+                            ? "w-full h-full rounded-md object-cover"
+                            : "hidden"
                         }
                         src={CDN_URL + info.imageId}
                         alt="image"
@@ -85,9 +82,9 @@ const RestaurantCategory = (props) => {
                 </div>
               );
             })}
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
+          </div>
+        )}
+      </div>
       <div
         className={
           lastEntry == "pending" ? "border-t-8 border-gray-200 my-12" : ""

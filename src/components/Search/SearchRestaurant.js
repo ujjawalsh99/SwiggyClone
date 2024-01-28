@@ -3,6 +3,7 @@ import { SWIGGY_SEARCH_API } from "../../utils/constants";
 import { CDN_URL } from "../../utils/constants";
 
 class SearchRestaurant extends React.Component {
+  timer;
   constructor() {
     super();
     this.state = {
@@ -16,25 +17,12 @@ class SearchRestaurant extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const fetchSearchResultBasedOnInput = async (data) => {
-      // console.log("fetching..");
-      const responseFromAPI = await fetch(SWIGGY_SEARCH_API + data);
-      const jsonData = await responseFromAPI.json();
-      if (jsonData?.statusCode == 0 && Object.keys(jsonData).includes("data")) {
-        this.setState({
-          resultRestaurantList: jsonData.data.suggestions,
-        });
-      } else {
-        this.setState({
-          resultRestaurantList: {},
-        });
-      }
-    };
-    if (prevState.searchText != this.state.searchText) {
-      // console.log("prevState.searchText", prevState.searchText);
-      // console.log("this.state.resultRestaurantList", this.state.searchText);
-      fetchSearchResultBasedOnInput(this.state.searchText);
-    }
+    // if (prevState.searchText != this.state.searchText) {
+    //   // console.log("prevState.searchText", prevState.searchText);
+    //   // console.log("this.state.resultRestaurantList", this.state.searchText);
+    //   // fetchSearchResultBasedOnInput(this.state.searchText);
+    //   betterFunction();
+    // }
   }
 
   componentWillUnmount() {}
@@ -68,15 +56,17 @@ class SearchRestaurant extends React.Component {
             className="block w-full p-4 text-sm text-gray-900 font-semibold border border-gray-400 rounded-md bg-gray-50 focus:outline-0"
             placeholder="Search for restaurant and food"
             autoComplete="off"
-            onChange={(e) => {
-              document.getElementById("search-icon").style.display = e.target
-                .value
-                ? "none"
-                : "block";
-              this.setState({
-                searchText: e.target.value,
-              });
-            }}
+            // onChange={(e) => {
+            //   document.getElementById("search-icon").style.display = e.target
+            //     .value
+            //     ? "none"
+            //     : "block";
+            //   this.setState({
+            //     searchText: e.target.value,
+            //   });
+            //   return this.betterFunction
+            // }}
+            onKeyUp={this.betterFunction.bind(this)}
           ></input>
         </div>
         <div
@@ -110,6 +100,38 @@ class SearchRestaurant extends React.Component {
           )}
         </div>
       </div>
+    );
+  }
+
+  fetchSearchResultBasedOnInput = async (data) => {
+    // console.log(data);
+    const responseFromAPI = await fetch(SWIGGY_SEARCH_API + data);
+    const jsonData = await responseFromAPI.json();
+    if (jsonData?.statusCode == 0 && Object.keys(jsonData).includes("data")) {
+      this.setState({
+        resultRestaurantList: jsonData.data.suggestions,
+      });
+    }
+  };
+
+  doSomeMagic = function (callback, searchText, delay) {
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => {
+      callback(searchText);
+    }, delay);
+  };
+
+  betterFunction(e) {
+    document.getElementById("search-icon").style.display = e.target.value
+      ? "none"
+      : "block";
+    // this.setState({
+    //   searchText: e.target.value,
+    // });
+    this.doSomeMagic(
+      this.fetchSearchResultBasedOnInput,
+      e.target.value,
+      500
     );
   }
 }

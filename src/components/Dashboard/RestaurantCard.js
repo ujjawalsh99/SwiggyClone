@@ -48,4 +48,17 @@ const RestaurantCard = (props) => {
   );
 };
 
+export const showTopRatedTag = (RestaurantCard) => {
+  return (props) => {
+    return (
+      <div className="relative">
+        <div className="has-[:hover]:bg-slate-200 absolute bg-red-500 py-1 px-2 text-white font-bold z-20 -left-2 -top-2 rounded-lg text ring-4 ring-offset-white select-none">
+          Top Rated Restaurant
+        </div>
+        <RestaurantCard {...props} />
+      </div>
+    );
+  };
+};
+
 export default RestaurantCard;
