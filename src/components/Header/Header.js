@@ -8,6 +8,8 @@ import NavigationIcon from "@mui/icons-material/Navigation";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import UserContext from "../../utils/context-data/UserContext";
+import LocalShippingIcon from "@mui/icons-material/LocalShipping";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   let [status, setStatus] = new useState("Login");
@@ -15,7 +17,11 @@ const Header = () => {
     status = status == "Login" ? "Logout" : "Login";
     setStatus(status);
   }
-  console.log(useContext(UserContext));
+  // console.log(useContext(UserContext));
+  const cartItemsCount = useSelector((store) => store.cart.cartItems.length);
+  function handleClick() {
+    console.log("Logging the click...");
+  }
   return (
     <div className="header flex shadow-md shadow-slate-200 w-full justify-between">
       <div className="w-1/6 flex p-3 justify-center">
@@ -25,13 +31,16 @@ const Header = () => {
       </div>
       <div className="w-4/6 shrink-0">
         <ul className="flex p-8 justify-end">
-          <li className="px-7 font-medium">
+          <li
+            className="text-gray-700 px-7 font-medium"
+            onClick={() => handleClick()}
+          >
             Availability: {useOnlineStatus() ? "🟢" : "🔴"}
           </li>
           <li>
             <Link
               to="/"
-              className="px-7 flex justify-center items-center gap-2 font-medium hover:text-orange-400 cursor-pointer"
+              className="text-gray-700 px-7 flex justify-center items-center gap-2 font-medium hover:text-orange-400 cursor-pointer"
             >
               <HomeIcon />
               Home
@@ -41,7 +50,7 @@ const Header = () => {
           <li>
             <Link
               to="/search"
-              className="px-7 flex justify-center items-center gap-2 font-medium hover:text-orange-400 cursor-pointer"
+              className="text-gray-700 px-7 flex justify-center items-center gap-2 font-medium hover:text-orange-400 cursor-pointer"
             >
               <SearchIcon />
               Search
@@ -50,7 +59,7 @@ const Header = () => {
           <li>
             <Link
               to="/career"
-              className="px-7 flex justify-center items-center gap-2 font-medium hover:text-orange-400 cursor-pointer"
+              className="text-gray-700 px-7 flex justify-center items-center gap-2 font-medium hover:text-orange-400 cursor-pointer"
             >
               <NavigationIcon />
               Career
@@ -68,10 +77,24 @@ const Header = () => {
           <li>
             <Link
               to="/instamart"
-              className="px-7 flex justify-center items-center gap-2 font-medium hover:text-orange-400 cursor-pointer"
+              className="text-gray-700 px-7 flex justify-center items-center gap-2 font-medium hover:text-orange-400 cursor-pointer"
+            >
+              <LocalShippingIcon />
+              Insta Mart
+            </Link>
+          </li>
+          <li className="relative">
+            <Link
+              to="/cart"
+              className="text-gray-700 px-7 flex justify-center items-center gap-4 font-medium hover:text-orange-400 cursor-pointer"
             >
               <ShoppingCartIcon />
-              Insta Mart
+              {cartItemsCount > 0 && (
+                <span className="absolute bottom-4 left-11 text-white rounded-full bg-red-400 py-1 px-2 text-xs">
+                  {cartItemsCount}
+                </span>
+              )}
+              Cart
             </Link>
           </li>
         </ul>
