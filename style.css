@@ -10,6 +10,8 @@
 
 .career-img {
   background-image: url(./src/assets/images/career.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .title {

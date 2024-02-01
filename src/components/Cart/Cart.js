@@ -19,13 +19,13 @@ const Cart = () => {
   }
 
   return cartData.length ? (
-    <div className="flex gap-8 w-full mx-auto p-20">
-      <div className="w-8/12 flex flex-col gap-4">
+    <div className="flex flex-col lg:flex-row gap-8 w-full mx-auto p-20">
+      <div className="w-full lg:w-8/12 flex flex-col gap-4">
         {cartData.map((item) => (
           <CartItemTile key={item.id} details={item} />
         ))}
       </div>
-      <div className="w-4/12 border-2 shadow-lg py-3 px-7">
+      <div className="w-full lg:w-4/12 border-2 shadow-lg py-3 px-7">
         <h1 className="text-2xl font-bold">Bill Details</h1>
         <div className="my-4">
           <div className="text-gray-600 py-4 my-1 border-b-2 flex flex-col gap-3">

@@ -41,7 +41,7 @@ const MenuItems = ({ data }) => {
           {info.description}
         </div>
       </div>
-      <div className="w-[125px] h-[100px] self-end relative">
+      <div className="w-[125px] h-[100px] md:self-end relative">
         <img
           className={
             info.imageId ? "w-full h-full rounded-md object-cover" : "hidden"

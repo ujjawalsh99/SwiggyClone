@@ -17,7 +17,7 @@ const RestaurantDetails = () => {
   let [resPrimaryData, resOfferData, resRecommended] = useRestaurantData(id);
   return Object.keys(resPrimaryData).length && resOfferData.length ? (
     <div className="w-full">
-      <div className="w-4/6 m-auto p-10">
+      <div className="w-full md:w-4/6 m-auto p-10">
         <div id="res-primary" className="my-8">
           <div className="flex justify-between">
             <div>

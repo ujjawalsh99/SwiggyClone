@@ -68,8 +68,8 @@ function getTitleIcon(key) {
 
 const Career = () => (
   <div className="h-screen">
-    <div className="career-img relative w-full h-4/6">
-      <div className="text-white absolute ml-96 mt-24">
+    <div className="career-img relative w-screen md:w-full h-3/6 md:h-4/6">
+      <div className="text-white absolute ml-20 mt-8 xl:ml-96 xl:mt-24">
         <p className="text-6xl font-semibold tracking-wide">Discover</p>
         <p className="text-4xl tracking-widest">The Swiggster</p>
         <p className="text-4xl tracking-widest">In You</p>
@@ -89,7 +89,7 @@ const Career = () => (
             Where Do You <span className="font-bold">Belong?</span>
           </p>
         </div>
-        <div className="flex flex-wrap basis-40 gap-x-64 gap-y-36 justify-around w-11/12 m-auto">
+        <div className="flex flex-wrap basis-40 gap-x-64 gap-y-20 md:gap-y-36 justify-around w-11/12 m-auto">
           {CareerDomains.map((item) => (
             <CareerCard key={item.id} data={item} />
           ))}
