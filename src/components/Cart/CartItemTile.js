@@ -1,8 +1,17 @@
 import { CDN_URL } from "../../utils/constants";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import {useDispatch} from "react-redux";
+import {removeItems} from '../../utils/ReduxStore/cartSlice';
 
 const CartItemTile = ({ details }) => {
+  let dispatchRef = useDispatch();
+
+  function deleteFromCart(itemId) {
+    dispatchRef(removeItems(itemId));
+  }
+
   return (
-    <div className="flex border-2 shadow-lg p-3 w-full hover:bg-gray-200">
+    <div className="flex border-2 shadow-lg p-3 w-full hover:bg-gray-200 relative">
       <div className="w-[125px] h-[100px]">
         <img
           src={CDN_URL + details.imageId}
@@ -22,6 +31,7 @@ const CartItemTile = ({ details }) => {
             : Math.floor(details.defaultPrice / 100)}
         </h2>
       </div>
+      <DeleteForeverIcon onClick={() => deleteFromCart(details.id)} className="absolute right-4 bottom-3 hover:scale-y-110 hover:text-red-500 cursor-pointer" />
     </div>
   );
 };

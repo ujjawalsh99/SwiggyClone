@@ -25,11 +25,11 @@ const Header = () => {
   }
   return (
     <Navbar fluid rounded className="mx-7">
-      <Navbar.Brand>
+      <div className="flex justify-center">
         <Link to="/">
           <img className="mr-3 h-6 sm:h-9" src={ReactLogo}></img>
         </Link>
-      </Navbar.Brand>
+      </div>
       <Navbar.Toggle />
       <Navbar.Collapse className="">
         <div onClick={() => handleClick()} className=" my-3 md:my-0">
