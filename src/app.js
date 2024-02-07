@@ -6,14 +6,22 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Error from "./components/Error";
 import LinearProgress from "@mui/material/LinearProgress";
 import Box from "@mui/material/Box";
+import UserContext from "./utils/context-data/UserContext.js";
+import { Provider } from "react-redux";
+import appStore from "./utils/ReduxStore/store.js";
+import Cart from "./components/Cart/Cart.js";
 // import { default as alpha, console2, console3 } from "./utils/constants";
 
 const AppLayout = () => {
   return (
-    <div className="app">
-      <Header />
-      <Outlet />
-    </div>
+    <Provider store={appStore}>
+      <div className="app">
+        <Header />
+        <UserContext.Provider value={{ username: "ujjawalsh99@gmail.com" }}>
+          <Outlet />
+        </UserContext.Provider>
+      </div>
+    </Provider>
   );
 };
 
@@ -90,6 +98,10 @@ const appRouter = createBrowserRouter([
             <InstaMart />
           </Suspense>
         ),
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
     errorElement: <Error />,

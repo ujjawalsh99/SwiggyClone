@@ -7,14 +7,17 @@ import StarIcon from "@mui/icons-material/Star";
 import InfoIcon from "@mui/icons-material/Info";
 import TimelapseIcon from "@mui/icons-material/Timelapse";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
+import { useState } from "react";
 
 const RestaurantDetails = () => {
   let dummyCount = new Array(10).fill(0);
   const { id } = useParams();
+  let [indexOfAccordionExpand, setIndexOfAccordionExpand] = useState(0);
+  let [accordionStatus, setAccordionStatus] = useState(true);
   let [resPrimaryData, resOfferData, resRecommended] = useRestaurantData(id);
   return Object.keys(resPrimaryData).length && resOfferData.length ? (
     <div className="w-full">
-      <div className="w-4/6 m-auto p-10">
+      <div className="w-full md:w-4/6 m-auto p-10">
         <div id="res-primary" className="my-8">
           <div className="flex justify-between">
             <div>
@@ -79,6 +82,15 @@ const RestaurantDetails = () => {
               key={index}
               data={item?.card?.card}
               lastEntry={index == resRecommended.length - 1 ? "end" : "pending"}
+              accordionEnableStatus={
+                index == indexOfAccordionExpand && accordionStatus
+                  ? true
+                  : false
+              }
+              changeAccordionIndexFunction={() =>
+                setIndexOfAccordionExpand(index)
+              }
+              currentAccordionStatus={setAccordionStatus}
             />
           ))}
         </div>
